@@ -21,9 +21,9 @@ app.get('/crop', (request, response) => {
             } else {
                 response.sendFile(`${__dirname}/tmp.png`);
             }
-        })
+        });
 
-    // fs.unlinkSync('./tmp.png'); // Delete the temporary file that we created in the cropping task
+    fs.unlinkSync(`${__dirname}/tmp.png`); // Delete the temporary file that we created in the cropping task
 });
 
 app.listen(port, () => {
