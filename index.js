@@ -20,9 +20,9 @@ app.get('/ping', (request, response) => {
 
 app.post('/crop', (request, response) => {
 
-    const { width, height } = request.body; // Get the width and height from the request parameters
+    const { width, height, image } = request.body;
 
-    gm(`${__dirname}/440639-1280x720.jpg`)
+    gm(image)
         .crop(width, height)
         .write(`${__dirname}/tmp.png`, (err) => {
             if (err) {
