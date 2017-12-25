@@ -15,7 +15,7 @@ app.get('/ping', (request, response) => {
     response.send('Pong!');
 });
 
-app.get('/crop', (request, response) => {
+app.post('/crop', (request, response) => {
 
     const { width, height } = request.query; // Get the width and height from the request parameters
 
@@ -30,7 +30,7 @@ app.get('/crop', (request, response) => {
             }
         });
 
-    fs.unlinkSync(`${__dirname}/tmp.png`); // Delete the temporary file that we created in the cropping task
+    // fs.unlinkSync(`${__dirname}/tmp.png`); // Delete the temporary file that we created in the cropping task
 });
 
 app.listen(port, () => {
