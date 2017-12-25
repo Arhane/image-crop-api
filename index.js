@@ -1,11 +1,14 @@
 const express = require('express');
 const fs = require('fs');
 const gm = require('gm');
+const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 
 app.set('views', './views');
-app.set('view engine', 'pug')
+app.set('view engine', 'pug');
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
     res.render('index')
@@ -17,7 +20,7 @@ app.get('/ping', (request, response) => {
 
 app.post('/crop', (request, response) => {
 
-    const { width, height } = request.query; // Get the width and height from the request parameters
+    const { width, height } = request.body; // Get the width and height from the request parameters
 
     gm(`${__dirname}/440639-1280x720.jpg`)
         .crop(width, height)
