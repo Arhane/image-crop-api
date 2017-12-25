@@ -11,7 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.2",
-    "gm": "^1.23.0"
+    "gm": "^1.23.0",
+    "pug": "^2.0.0-rc.4"
   },
   "devDependencies": {
     "nodemon": "^1.14.3"
