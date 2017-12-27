@@ -25,8 +25,7 @@ app.post('/crop', (request, response) => {
             imageTemp.push(data);
         });
     });
-    busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
-        // console.log('Field [' + fieldname + ']: value: ' + val);
+    busboy.on('field', function(fieldname, val) {
         temp[fieldname] = val;
     });
     busboy.on('finish', function() {
