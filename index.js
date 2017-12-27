@@ -19,24 +19,26 @@ app.get('/ping', (request, response) => {
 app.post('/crop', (request, response) => {
     const busboy = new Busboy({ headers: request.headers });
     let temp = {};
+    let imageTemp = [];
     busboy.on('file', (fieldName, file, filename, encoding, mimetype) => {
-        console.log('File [' + fieldName + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
+        // console.log('File [' + fieldName + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
         file.on('data', function(data) {
-            console.log('File [' + fieldName + '] got ' + data.length + ' bytes');
+            // console.log('File [' + fieldName + '] got ' + data.length + ' bytes');
+            imageTemp.push(data);
         });
         file.on('end', function() {
-            temp[fieldName] = file;
-            console.log('File [' + fieldName + '] Finished');
+            // console.log('File [' + fieldName + '] Finished');
         });
     });
     busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
-        console.log('Field [' + fieldname + ']: value: ' + val);
+        // console.log('Field [' + fieldname + ']: value: ' + val);
         temp[fieldname] = val;
     });
     busboy.on('finish', function() {
-        console.log('Done parsing form!');
+        // console.log('Done parsing form!');
+        const imageBuf = Buffer.concat(imageTemp);
         const { image, width, height } = temp;
-        gm(temp.image, 'img.png')
+        gm(imageBuf, 'img.png')
             .crop(width, height)
             .write(`${__dirname}/tmp.png`, (err) => {
                 if (err) {
