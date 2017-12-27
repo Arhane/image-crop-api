@@ -3,7 +3,7 @@ const fs = require('fs');
 const gm = require('gm');
 const Busboy = require('busboy');
 const app = express();
-const port = 3000;
+const port = 9000;
 
 app.set('views', './views');
 app.set('view engine', 'pug');
