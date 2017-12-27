@@ -20,14 +20,9 @@ app.post('/crop', (request, response) => {
     const busboy = new Busboy({ headers: request.headers });
     let temp = {};
     let imageTemp = [];
-    busboy.on('file', (fieldName, file, filename, encoding, mimetype) => {
-        // console.log('File [' + fieldName + ']: filename: ' + filename + ', encoding: ' + encoding + ', mimetype: ' + mimetype);
+    busboy.on('file', (fieldName, file) => {
         file.on('data', function(data) {
-            // console.log('File [' + fieldName + '] got ' + data.length + ' bytes');
             imageTemp.push(data);
-        });
-        file.on('end', function() {
-            // console.log('File [' + fieldName + '] Finished');
         });
     });
     busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
