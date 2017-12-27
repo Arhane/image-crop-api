@@ -29,14 +29,12 @@ app.post('/crop', (request, response) => {
         temp[fieldname] = val;
     });
     busboy.on('finish', function() {
-        // console.log('Done parsing form!');
         const imageBuf = Buffer.concat(imageTemp);
-        const { image, width, height } = temp;
+        const { width, height } = temp;
         gm(imageBuf, 'img.png')
             .crop(width, height)
             .write(`${__dirname}/tmp.png`, (err) => {
                 if (err) {
-                    console.log(err);
                     response.send(err);
                 } else {
                     response.sendFile(`${__dirname}/tmp.png`);
