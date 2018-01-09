@@ -3,7 +3,7 @@ html
         title qwe
     body
         form(method='POST' enctype='multipart/form-data' action='/crop')
-            input(type='file' name='image')
+            input(type='file' name='image' id='file-input')
             input(type='number' name='width' placeholder='Ширина')
             input(type='number' name='height' placeholder='Высота')
             button Upload
